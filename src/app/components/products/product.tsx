@@ -1,6 +1,3 @@
-import { ShoppingCart } from '@nutriApp/app/icons/shoppingCart';
-import Image from 'next/image';
-
 export interface Product {
   id: string;
   title: string;
@@ -25,6 +22,7 @@ export const Product = ({ product }: Props) => {
       </h1>
       <div>
         {product.image ? (
+          // eslint-disable-next-line
           <img
             src={product.image}
             alt={product.title}
@@ -33,6 +31,7 @@ export const Product = ({ product }: Props) => {
             className="rounded-xl border border-stone-200"
           />
         ) : (
+          // eslint-disable-next-line
           <img
             src={
               'https://static.vecteezy.com/system/resources/previews/027/381/351/non_2x/shopping-cart-icon-shopping-trolley-icon-shopping-cart-logo-container-for-goods-and-products-economics-symbol-design-elements-basket-symbol-silhouette-retail-design-elements-vector.jpg'
