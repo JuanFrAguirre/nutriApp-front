@@ -32,7 +32,7 @@ export const CalculatorProduct = ({ product }: Props) => {
   }, [modifyProduct, percentage]);
 
   return (
-    <div className="border-2 rounded-lg p-2 lg:flex gap-4 lg:max-h-[400px]">
+    <div className="border-2 rounded-lg p-2 lg:flex gap-4 lg:max-h-[400px] shadow-lg">
       <div className="lg:basis-1/2 lg:flex flex-col justify-between">
         <div className="flex justify-between p-1 items-center">
           <p className="line-clamp-1 md:line-clamp-2 text-lg text-brandGreen font-bold mb-2">
@@ -93,13 +93,14 @@ export const CalculatorProduct = ({ product }: Props) => {
           </button>
         </div>
         <div className="border-b border-stone-300 mb-1 py-1 flex items-center gap-4">
-          <p className="text-lg text-brandGreen">Porcion</p>
+          <p className="text-lg text-brandGreen">Porción</p>
           <p>
             {percentage == 100 ? (
               `${product.presentationSize.toFixed(1)}g`
             ) : (
               <>
-                {(percentage * 0.01 * product.presentationSize).toFixed(1)}g /
+                {(percentage * 0.01 * product.presentationSize).toFixed(1)}g
+                &nbsp;&nbsp;/&nbsp;&nbsp;
                 {product.presentationSize.toFixed(1)}g - ({percentage}%)
               </>
             )}
@@ -108,19 +109,13 @@ export const CalculatorProduct = ({ product }: Props) => {
         {/* </div> */}
         <div className="flex justify-between">
           <div className="p-0.5">
-            <p>Calories</p>
-            <p className="text-brandGreen font-semibold">
-              {product.calories.toFixed(1)}kcal
-            </p>
-          </div>
-          <div className="p-0.5">
-            <p>Protein</p>
+            <p>Proteínas</p>
             <p className="text-brandGreen font-semibold">
               {product.proteins.toFixed(1)}g
             </p>
           </div>
           <div className="p-0.5">
-            <p>Fat</p>
+            <p>Grasas</p>
             <p className="text-brandGreen font-semibold">
               {product.fats.toFixed(1)}g
             </p>
@@ -129,6 +124,12 @@ export const CalculatorProduct = ({ product }: Props) => {
             <p>Carbos</p>
             <p className="text-brandGreen font-semibold">
               {product.carbohydrates.toFixed(1)}g
+            </p>
+          </div>
+          <div className="p-0.5">
+            <p>Calorías</p>
+            <p className="text-brandGreen font-semibold">
+              {product.calories.toFixed(1)}kcal
             </p>
           </div>
         </div>

@@ -27,7 +27,7 @@ export const Calculator: FC<CalculatorProps> = ({ productsList }) => {
   return (
     <div className="flex flex-col h-full pt-2">
       {!!productsList.length ? (
-        <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-2 grow overflow-y-auto px-2">
+        <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 lg:gap-10 grow overflow-y-auto px-2 pb-4">
           {productsList.map((product) => (
             <CalculatorProduct key={product.id} product={product} />
           ))}

@@ -60,21 +60,27 @@ export const Product = ({ product }: Props) => {
             className="rounded-xl border border-stone-200"
           />
         )}
-        <h1 className="font-bold text-brandGreen line-clamp-2">
+        <h1 className="font-bold text-brandGreen line-clamp-2 pb-1 mt-1 border-b border-stone-200">
           {product.title}
         </h1>
       </div>
+
+      <div className="flex justify-between items-center border-b border-stone-200 mb-1 pb-1">
+        <p>Porción</p>
+        <p className="text-brandGreen font-bold">{product.presentationSize}g</p>
+      </div>
+
       <div>
         <div className="flex gap-1">
           <div className="flex flex-col basis-1/2">
             <p>
-              Proteins <br />{' '}
+              Proteínas <br />{' '}
               <span className="text-brandGreen font-bold text-lg">
                 {product.proteins}g
               </span>
             </p>
             <p>
-              Fats <br />{' '}
+              Grasas <br />{' '}
               <span className="text-brandGreen font-bold text-lg">
                 {product.fats}g
               </span>
@@ -82,22 +88,19 @@ export const Product = ({ product }: Props) => {
           </div>
           <div className="flex flex-col basis-1/2">
             <p>
-              Carbs <br />{' '}
+              Carbos <br />{' '}
               <span className="text-brandGreen font-bold text-lg">
                 {product.carbohydrates}g
               </span>
             </p>
             <p>
-              Calories <br />{' '}
+              Calorías <br />{' '}
               <span className="text-brandGreen font-bold text-lg">
                 {product.calories}kcal
               </span>
             </p>
           </div>
         </div>
-        <small className="text-brandGreen">
-          Size: {product.presentationSize}g
-        </small>
       </div>
     </div>
   );
