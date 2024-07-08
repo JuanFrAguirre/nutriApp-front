@@ -1,3 +1,4 @@
+'use client';
 import localFont from 'next/font/local';
 import Image from 'next/image';
 import Logo from '@nutriApp/img/nutriApp.jpeg';
@@ -22,7 +23,7 @@ export const frankfurter = localFont({
 export const Header = () => {
   return (
     <header
-      className={`bg-white py-4 px-3 border-b-2 border-stone-200 flex justify-between items-center fixed top-0 left-0 right-0`}
+      className={`bg-white py-4 px-3 border-b-2 border-stone-200 flex justify-between items-center fixed top-0 left-0 right-0 z-[600]`}
     >
       <Link href={'/'} className="flex items-center gap-1">
         <Image
@@ -39,7 +40,15 @@ export const Header = () => {
         </h1>
       </Link>
       <div>
-        <Input id="searchbar" name="searchbar" type="text" className="w-full" />
+        <Input
+          id="searchbar"
+          name="searchbar"
+          type="text"
+          className="w-full"
+          logo
+          inputClassName="w-40"
+          onChange={() => {}}
+        />
       </div>
     </header>
   );

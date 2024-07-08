@@ -1,3 +1,7 @@
+import { Check } from '@nutriApp/app/icons/Check';
+import { PlusSign } from '@nutriApp/app/icons/PlusSign';
+import { useCalculator } from '@nutriApp/app/services/useCalculator';
+
 export interface Product {
   id: string;
   title: string;
@@ -15,12 +19,26 @@ interface Props {
 }
 
 export const Product = ({ product }: Props) => {
+  const { addProduct, productsList } = useCalculator();
+
+  const addProductToCalculator = () => {
+    if (productsList.find((x) => x.id === product.id)) return;
+    addProduct({ ...product, percentage: 100 });
+  };
+
   return (
-    <div className="w-full p-3 py-2 border-2 border-stone-200 rounded-lg shadow-lg space-y-2">
-      <h1 className="font-bold text-brandGreen line-clamp-2">
-        {product.title}
-      </h1>
-      <div>
+    <div className="w-full p-3 py-2 border-2 border-stone-200 rounded-lg shadow-lg space-y-2 relative flex flex-col justify-between">
+      <button
+        className="absolute right-2 top-2 bg-brandGreen rounded-full p-0.5"
+        onClick={addProductToCalculator}
+      >
+        {productsList.find((x) => x.id === product.id) ? (
+          <Check className="fill-white w-8 h-8" />
+        ) : (
+          <PlusSign className="fill-white w-8 h-8" />
+        )}
+      </button>
+      <div className="space-y-2">
         {product.image ? (
           // eslint-disable-next-line
           <img
@@ -42,36 +60,44 @@ export const Product = ({ product }: Props) => {
             className="rounded-xl border border-stone-200"
           />
         )}
+        <h1 className="font-bold text-brandGreen line-clamp-2">
+          {product.title}
+        </h1>
       </div>
-      <div className="flex gap-1">
-        <div className="flex flex-col basis-1/2">
-          <p>
-            Proteins <br />{' '}
-            <span className="text-brandGreen font-bold text-lg">
-              {product.proteins}g
-            </span>
-          </p>
-          <p>
-            Fats <br />{' '}
-            <span className="text-brandGreen font-bold text-lg">
-              {product.fats}g
-            </span>
-          </p>
+      <div>
+        <div className="flex gap-1">
+          <div className="flex flex-col basis-1/2">
+            <p>
+              Proteins <br />{' '}
+              <span className="text-brandGreen font-bold text-lg">
+                {product.proteins}g
+              </span>
+            </p>
+            <p>
+              Fats <br />{' '}
+              <span className="text-brandGreen font-bold text-lg">
+                {product.fats}g
+              </span>
+            </p>
+          </div>
+          <div className="flex flex-col basis-1/2">
+            <p>
+              Carbs <br />{' '}
+              <span className="text-brandGreen font-bold text-lg">
+                {product.carbohydrates}g
+              </span>
+            </p>
+            <p>
+              Calories <br />{' '}
+              <span className="text-brandGreen font-bold text-lg">
+                {product.calories}kcal
+              </span>
+            </p>
+          </div>
         </div>
-        <div className="flex flex-col basis-1/2">
-          <p>
-            Carbs <br />{' '}
-            <span className="text-brandGreen font-bold text-lg">
-              {product.carbohydrates}g
-            </span>
-          </p>
-          <p>
-            Calories <br />{' '}
-            <span className="text-brandGreen font-bold text-lg">
-              {product.calories}kcal
-            </span>
-          </p>
-        </div>
+        <small className="text-brandGreen">
+          Size: {product.presentationSize}g
+        </small>
       </div>
     </div>
   );
