@@ -3,6 +3,7 @@ import { PlusSign } from '@nutriApp/app/icons/PlusSign';
 import { Trashcan } from '@nutriApp/app/icons/Trashcan';
 import { useCalculator } from '@nutriApp/app/services/useCalculator';
 import { useProducts } from '@nutriApp/app/services/useProducts';
+import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 import { toast } from 'react-toastify';
 
@@ -50,7 +51,12 @@ export const Product = ({ product }: Props) => {
   }, [deleteProduct, product.id]);
 
   return (
-    <div className="w-full p-3 py-2 border-2 border-stone-200 rounded-lg shadow-xl space-y-2 relative flex flex-col justify-between">
+    <div
+      className={clsx(
+        'w-full p-3 py-2 border-2 rounded-lg shadow-xl space-y-2 relative flex flex-col justify-between',
+        isAddedToCalculator ? 'border-brandGreen' : 'border-stone-200',
+      )}
+    >
       <button
         className="absolute right-2 top-2 bg-brandGreen rounded-full p-0.5"
         onClick={
@@ -79,7 +85,12 @@ export const Product = ({ product }: Props) => {
             alt={product.title}
             width={900}
             height={900}
-            className="rounded-xl border border-stone-200"
+            className={clsx(
+              'rounded-xl border',
+              isAddedToCalculator
+                ? 'border-brandGreen border-2'
+                : 'border-stone-200',
+            )}
           />
         ) : (
           // eslint-disable-next-line
@@ -90,15 +101,30 @@ export const Product = ({ product }: Props) => {
             alt={product.title}
             width={900}
             height={900}
-            className="rounded-xl border border-stone-200"
+            className={clsx(
+              'rounded-xl border',
+              isAddedToCalculator
+                ? 'border-brandGreen border-2'
+                : 'border-stone-200',
+            )}
           />
         )}
-        <h1 className="font-bold text-brandGreen line-clamp-2 pb-1 mt-1 border-b border-stone-200">
+        <h1
+          className={clsx(
+            'font-bold text-brandGreen line-clamp-2 pb-1 mt-1 border-b',
+            isAddedToCalculator ? 'border-brandGreen' : 'border-stone-200',
+          )}
+        >
           {product.title}
         </h1>
       </div>
 
-      <div className="flex justify-between items-center border-b border-stone-200 mb-1 pb-1">
+      <div
+        className={clsx(
+          'flex justify-between items-center border-b mb-1 pb-1',
+          isAddedToCalculator ? 'border-brandGreen' : 'border-stone-200',
+        )}
+      >
         <p>Porción</p>
         <p className="text-brandGreen font-bold">{product.presentationSize}g</p>
       </div>
