@@ -87,9 +87,7 @@ export const Product = ({ product }: Props) => {
             height={900}
             className={clsx(
               'rounded-xl border',
-              isAddedToCalculator
-                ? 'border-brandGreen border-2'
-                : 'border-stone-200',
+              isAddedToCalculator ? 'border-brandGreen' : 'border-stone-200',
             )}
           />
         ) : (
@@ -103,9 +101,7 @@ export const Product = ({ product }: Props) => {
             height={900}
             className={clsx(
               'rounded-xl border',
-              isAddedToCalculator
-                ? 'border-brandGreen border-2'
-                : 'border-stone-200',
+              isAddedToCalculator ? 'border-brandGreen' : 'border-stone-200',
             )}
           />
         )}
