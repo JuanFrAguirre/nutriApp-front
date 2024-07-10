@@ -46,7 +46,6 @@ export const useProducts = () => {
     try {
       setLoading(true);
       const response = await axios.get(`${BACKEND_URL}/products`);
-      console.log(response.data);
       setTimeout(() => {
         setProducts(response.data);
         setLoading(false);
