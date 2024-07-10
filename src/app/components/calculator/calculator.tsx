@@ -31,7 +31,7 @@ export const Calculator: FC<CalculatorProps> = ({ productsList }) => {
   return (
     <div className="flex flex-col h-full pt-2 xl:pt-0 xl:flex-row">
       {!!productsList.length ? (
-        <div className="flex flex-col md:grid md:grid-cols-2 xl:grid-cols-3 gap-2 md:gap-4 lg:gap-10 grow overflow-y-auto px-2 xl:px-4 pb-4 xl:pt-4">
+        <div className="flex flex-col md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-4 lg:gap-10 grow overflow-y-auto px-2 xl:px-4 pb-4 xl:pt-4">
           {productsList.map((product) => (
             <CalculatorProduct key={product.id} product={product} />
           ))}
@@ -42,19 +42,19 @@ export const Calculator: FC<CalculatorProps> = ({ productsList }) => {
         </div>
       )}
       <div className="flex max-xl:max-h-[30%] flex-col font-semibold px-5 pb-3 xl:pt-2 border-t-2 xl:border-t-0 xl:border-l-2 border-brandGreen xl:justify-center xl:gap-10">
-        <p className="text-lg text-brandGreen font-semibold text-center py-1 xl:text-left">
+        <p className="text-lg xl:text-2xl text-brandGreen font-semibold text-center py-1 xl:text-left">
           Totales
         </p>
         <div className="flex justify-between xl:flex-col">
           <div>
-            <p>
+            <p className="xl:mb-5">
               Calorías
               <br />
               <span className="text-brandGreen text-lg font-bold">
                 {obtainValue('calories')}kcal
               </span>
             </p>
-            <p>
+            <p className="xl:mb-5">
               Proteínas
               <br />
               <span className="text-brandGreen text-lg font-bold">
@@ -63,14 +63,14 @@ export const Calculator: FC<CalculatorProps> = ({ productsList }) => {
             </p>
           </div>
           <div>
-            <p>
+            <p className="xl:mb-5">
               Grasas
               <br />
               <span className="text-brandGreen text-lg font-bold">
                 {obtainValue('fats')}g
               </span>
             </p>
-            <p>
+            <p className="xl:mb-5">
               Carbohidratos
               <br />
               <span className="text-brandGreen text-lg font-bold">

@@ -16,7 +16,7 @@ export const Products = () => {
     <>
       <main className="px-2 py-3 md:max-w-[768px] md:mx-auto lg:max-w-[1024px] xl:max-w-[1280px]">
         {!!products?.length ? (
-          <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+          <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
             {products.map((product) => (
               <Product key={product.id} product={product} />
             ))}

@@ -74,25 +74,53 @@ export const CalculatorProduct = ({ product }: Props) => {
           <div className="p-0.5 ">
             <p>Proteínas</p>
             <p className="text-brandGreen line-clamp-2 font-semibold">
-              {(percentage * 0.01 * product.proteins).toFixed(1)}g
+              {(
+                0.01 *
+                product.presentationSize *
+                percentage *
+                0.01 *
+                product.proteins
+              ).toFixed(1)}
+              g
             </p>
           </div>
           <div className="p-0.5 ">
             <p>Grasas</p>
             <p className="text-brandGreen line-clamp-2 font-semibold">
-              {(percentage * 0.01 * product.fats).toFixed(1)}g
+              {(
+                0.01 *
+                product.presentationSize *
+                percentage *
+                0.01 *
+                product.fats
+              ).toFixed(1)}
+              g
             </p>
           </div>
           <div className="p-0.5 ">
             <p>Carbos</p>
             <p className="text-brandGreen line-clamp-2 font-semibold">
-              {(percentage * 0.01 * product.carbohydrates).toFixed(1)}g
+              {(
+                0.01 *
+                product.presentationSize *
+                percentage *
+                0.01 *
+                product.carbohydrates
+              ).toFixed(1)}
+              g
             </p>
           </div>
           <div className="p-0.5 ">
             <p>Calorías</p>
             <p className="text-brandGreen line-clamp-2 font-semibold">
-              {(percentage * 0.01 * product.calories).toFixed(1)}kcal
+              {(
+                0.01 *
+                product.presentationSize *
+                percentage *
+                0.01 *
+                product.calories
+              ).toFixed(1)}
+              kcal
             </p>
           </div>
         </div>
