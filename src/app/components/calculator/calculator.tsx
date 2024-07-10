@@ -16,7 +16,11 @@ export const Calculator: FC<CalculatorProps> = ({ productsList }) => {
         .reduce(
           (acc, curr) =>
             acc +
-            curr[value] * curr.presentationSize * 0.01 * curr.percentage * 0.01,
+            curr[value] *
+              curr.presentationSize *
+              0.01 *
+              curr.percentage! *
+              0.01,
           0,
         )
         .toFixed(1);
@@ -27,7 +31,7 @@ export const Calculator: FC<CalculatorProps> = ({ productsList }) => {
   return (
     <div className="flex flex-col h-full pt-2">
       {!!productsList.length ? (
-        <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 lg:gap-10 grow overflow-y-auto px-2 pb-4">
+        <div className="flex flex-col md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-4 lg:gap-10 grow overflow-y-auto px-2 pb-4">
           {productsList.map((product) => (
             <CalculatorProduct key={product.id} product={product} />
           ))}

@@ -12,7 +12,7 @@ import {
 import { Product } from '../components/products/product';
 
 export interface ExtendedProduct extends Product {
-  percentage: number;
+  percentage?: number;
 }
 
 interface CalculatorContext {
@@ -51,8 +51,9 @@ export const useCalculator = () => {
   const modifyProduct = useCallback(
     (product: ExtendedProduct) => {
       setProductsList((currentProducts) => [
-        ...currentProducts.filter((x) => x.id !== product.id),
-        product,
+        ...currentProducts.map((currProduct) =>
+          currProduct.id === product.id ? product : currProduct,
+        ),
       ]);
     },
     [setProductsList],

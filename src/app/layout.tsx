@@ -1,10 +1,13 @@
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
+import { LoadingSpinner } from './components/loadingSpinner/loadingSpinner';
 import './globals.css';
+import { CalculatorProvider } from './services/useCalculator';
 import { LoadingSpinnerProvider } from './services/useLoading';
 import { ModalProvider } from './services/useModal';
-import { LoadingSpinner } from './components/loadingSpinner/loadingSpinner';
-import { CalculatorProvider } from './services/useCalculator';
+import { ToastContainer } from 'react-toastify';
+import ToastProvider from './components/toastContainer/toastContainer';
+import { ProductsProvider } from './services/useProducts';
 
 const openSans = Open_Sans({ subsets: ['latin'] });
 
@@ -20,14 +23,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ModalProvider>
-        <LoadingSpinnerProvider>
-          <CalculatorProvider>
-            <body className={openSans.className}>{children}</body>
-          </CalculatorProvider>
-          <LoadingSpinner />
-        </LoadingSpinnerProvider>
-      </ModalProvider>
+      <body className={openSans.className}>
+        <ToastProvider>
+          <ModalProvider>
+            <LoadingSpinnerProvider>
+              <ProductsProvider>
+                <CalculatorProvider>{children}</CalculatorProvider>
+              </ProductsProvider>
+              <LoadingSpinner />
+            </LoadingSpinnerProvider>
+          </ModalProvider>
+        </ToastProvider>
+      </body>
     </html>
   );
 }

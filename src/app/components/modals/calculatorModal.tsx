@@ -1,12 +1,9 @@
-import {
-  ExtendedProduct,
-  useCalculator,
-} from '@nutriApp/app/services/useCalculator';
+'use client';
+import { useCalculator } from '@nutriApp/app/services/useCalculator';
 import { useModal } from '@nutriApp/app/services/useModal';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { Input } from '../input/input';
-import { Modal } from './modal';
 import { Calculator } from '../calculator/calculator';
+import { Modal } from './modal';
+import { useEffect } from 'react';
 
 export const CalculatorModal = () => {
   const { productsList } = useCalculator();
@@ -15,6 +12,18 @@ export const CalculatorModal = () => {
   const closeModal = () => {
     setShow(false);
   };
+
+  useEffect(() => {
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShow(false);
+    };
+
+    document.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      document.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [setShow]);
 
   return (
     <Modal closeModal={closeModal}>

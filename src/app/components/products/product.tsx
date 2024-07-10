@@ -1,12 +1,16 @@
 import { Check } from '@nutriApp/app/icons/Check';
 import { PlusSign } from '@nutriApp/app/icons/PlusSign';
+import { Trashcan } from '@nutriApp/app/icons/Trashcan';
 import { useCalculator } from '@nutriApp/app/services/useCalculator';
+import { useProducts } from '@nutriApp/app/services/useProducts';
+import { useCallback, useMemo } from 'react';
+import { toast } from 'react-toastify';
 
 export interface Product {
-  id: string;
+  id?: string;
   title: string;
   presentationSize: number;
-  description: string;
+  description?: string;
   image?: string;
   calories: number;
   proteins: number;
@@ -19,25 +23,54 @@ interface Props {
 }
 
 export const Product = ({ product }: Props) => {
-  const { addProduct, productsList } = useCalculator();
+  const { addProduct, productsList, removeProduct } = useCalculator();
+  const { deleteProduct } = useProducts();
 
-  const addProductToCalculator = () => {
+  const isAddedToCalculator = useMemo(
+    () => productsList.find((x) => x.id === product.id),
+    [productsList, product.id],
+  );
+
+  const onAddProductToCalculator = useCallback(() => {
     if (productsList.find((x) => x.id === product.id)) return;
     addProduct({ ...product, percentage: 100 });
-  };
+  }, [addProduct, product, productsList]);
+
+  const onRemoveProductFromCalculator = useCallback(() => {
+    if (!isAddedToCalculator) return;
+    if (!product.id) return;
+    removeProduct(product.id);
+  }, [isAddedToCalculator, removeProduct, product.id]);
+
+  const onDeleteClick = useCallback(() => {
+    if (!product.id) {
+      toast.error('Invalid product data. Cannot delete.');
+    }
+    deleteProduct(product.id!);
+  }, [deleteProduct, product.id]);
 
   return (
-    <div className="w-full p-3 py-2 border-2 border-stone-200 rounded-lg shadow-lg space-y-2 relative flex flex-col justify-between">
+    <div className="w-full p-3 py-2 border-2 border-stone-200 rounded-lg shadow-xl space-y-2 relative flex flex-col justify-between">
       <button
         className="absolute right-2 top-2 bg-brandGreen rounded-full p-0.5"
-        onClick={addProductToCalculator}
+        onClick={
+          isAddedToCalculator
+            ? onRemoveProductFromCalculator
+            : onAddProductToCalculator
+        }
       >
-        {productsList.find((x) => x.id === product.id) ? (
+        {isAddedToCalculator ? (
           <Check className="fill-white w-8 h-8" />
         ) : (
           <PlusSign className="fill-white w-8 h-8" />
         )}
       </button>
+      {/* <button
+        className="absolute right-3 top-10 bg-white border-[2px] border-red-500 rounded-full p-0.5"
+        onClick={onDeleteClick}
+      >
+        <Trashcan className="fill-red-500 w-5 h-5" />
+      </button> */}
       <div className="space-y-2">
         {product.image ? (
           // eslint-disable-next-line
