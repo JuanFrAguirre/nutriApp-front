@@ -28,7 +28,7 @@ export const CalculatorProduct = ({ product }: Props) => {
   return (
     <div className="border-2 rounded-lg p-2 md:flex md:flex-col xl:flex-row gap-4 xl:max-h-[400px] shadow-lg">
       <div className="xl:basis-1/2 xl:w-1/2 xl:flex flex-col justify-between">
-        <div className="flex justify-between p-1 items-center">
+        <div className="flex justify-between p-1 items-center md:items-start">
           <p className="line-clamp-1 md:line-clamp-2 xl:line-clamp-4 text-lg text-brandGreen font-bold mb-2">
             {product.title}
           </p>
