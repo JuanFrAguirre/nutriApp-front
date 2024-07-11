@@ -15,13 +15,16 @@ import { toast } from 'react-toastify';
 import { Input } from '../input/input';
 import { AddProductModal } from '../modals/addProductModal';
 
+const STOCK_IMAGE =
+  'https://static.vecteezy.com/system/resources/previews/027/381/351/non_2x/shopping-cart-icon-shopping-trolley-icon-shopping-cart-logo-container-for-goods-and-products-economics-symbol-design-elements-basket-symbol-silhouette-retail-design-elements-vector.jpg';
+
 export const AddProduct = () => {
   const { setShow } = useModal(AddProductModal.displayName!);
   const addProductForm = useRef<HTMLFormElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const { addProduct } = useProducts();
   const { setLoading } = useLoadingSpinner();
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(STOCK_IMAGE);
 
   const validateForm = useCallback((formData: FormData) => {
     const formValues = Object.fromEntries(formData.entries());
@@ -126,6 +129,15 @@ export const AddProduct = () => {
                   label="Imagen (URL)"
                   onChange={onImgInputChange}
                 />
+                {/* <Input
+                  className="flex flex-col gap-1 md:gap-2"
+                  labelClassName="md:font-semibold"
+                  inputClassName="md:px-4 md:py-2"
+                  id="mercadonApinumber"
+                  name="mercadonApinumber"
+                  type="text"
+                  label="Numero de producto (en API de Mercadona)"
+                /> */}
                 <Input
                   className="flex flex-col gap-1 md:gap-2"
                   labelClassName="md:font-semibold"

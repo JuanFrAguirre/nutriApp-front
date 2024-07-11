@@ -55,90 +55,103 @@ export const CalculatorProduct = ({ product }: Props) => {
   return (
     <div className="border-2 rounded-lg p-2 md:flex md:flex-col xl:flex-row gap-4 xl:max-h-[400px] shadow-lg">
       <div className="xl:basis-1/2 xl:w-1/2 xl:flex flex-col justify-between">
-        <div className="flex justify-between p-1 items-center md:items-start">
-          <p className="line-clamp-1 md:line-clamp-2 xl:line-clamp-4 text-lg text-brandGreen font-bold mb-2">
-            {product.title}
-          </p>
-          <button
-            className="flex items-center"
-            onClick={() => removeProduct(product.id!)}
-          >
-            <Trashcan className="fill-red-500 w-8 h-8" />
-          </button>
-        </div>
-        <p className="text-brandGreen text-lg pb-2">Ingresa la medida</p>
-        <div className="flex gap-4 justify-between pb-4">
-          <div className="">
-            <button
-              className={clsx(
-                'text-center rounded-xl p-2 border',
-                typeOfMeasurement === 'relative'
-                  ? 'border-brandGreen'
-                  : 'border-transparent',
+        <div className="flex gap-2 sm:gap-4">
+          <div className="flex flex-col max-md:w-[49%]">
+            <div className="flex justify-between p-1 items-center md:items-start">
+              <p className="line-clamp-2 xl:line-clamp-4 text-lg text-brandGreen font-bold mb-2">
+                {product.title}
+              </p>
+              <button
+                className="flex items-center"
+                onClick={() => removeProduct(product.id!)}
+              >
+                <Trashcan className="fill-red-500 w-8 h-8" />
+              </button>
+            </div>
+            <p className="text-brandGreen text-lg pb-2 max-md:text-center">
+              Ingresa la medida
+            </p>
+            <div className="flex gap-4 justify-between pb-4 max-md:flex-col max-md:items-center">
+              <div className="max-md:w-full">
+                <button
+                  className={clsx(
+                    'text-center rounded-xl p-2 border max-md:w-full',
+                    typeOfMeasurement === 'relative'
+                      ? 'border-brandGreen'
+                      : 'border-transparent',
+                  )}
+                  onClick={() => {
+                    setTypeOfMeasurement('relative');
+                  }}
+                >
+                  <p>Unidades relativas</p>
+                </button>
+              </div>
+              <div className="max-md:w-full">
+                <button
+                  className={clsx(
+                    'text-center rounded-xl p-2 border max-md:w-full',
+                    typeOfMeasurement === 'absolute'
+                      ? 'border-brandGreen'
+                      : 'border-transparent',
+                  )}
+                  onClick={() => {
+                    setTypeOfMeasurement('absolute');
+                  }}
+                >
+                  <p>Unidades absolutas</p>
+                </button>
+              </div>
+            </div>
+            <div className="border border-stone-200 rounded-xl">
+              {typeOfMeasurement === 'relative' ? (
+                <Select
+                  id={`percentage-${product.id}`}
+                  name="percentage"
+                  options={[
+                    { id: '12.5', value: '1/8 unidad' },
+                    { id: '16.66', value: '1/6 unidad' },
+                    { id: '20', value: '1/5 unidad' },
+                    { id: '25', value: '1/4 unidad' },
+                    { id: '33.33', value: '1/3 unidad' },
+                    { id: '50', value: '1/2 unidad' },
+                    { id: '100', value: '1 unidad', default: true },
+                    { id: '200', value: '2 unidades' },
+                    { id: '300', value: '3 unidades' },
+                    { id: '400', value: '4 unidades' },
+                    { id: '500', value: '5 unidades' },
+                  ]}
+                  className="w-full"
+                  selectClassName="w-full text-center rounded-xl p-1 md:px-4 md:py-2 bg-stone-200"
+                  onChange={(e) => {
+                    changePercentage(Number(e.target.value));
+                  }}
+                />
+              ) : (
+                <Input
+                  className="flex flex-col gap-1 md:gap-2"
+                  inputClassName="md:px-4 md:py-2"
+                  id={`proteins-${product.id}`}
+                  name="proteins"
+                  type="number"
+                  onChange={(e) => {
+                    changeAbsoluteWeight(Number(e.target.value));
+                  }}
+                  placeholder="Peso en gramos..."
+                  required
+                  step={0.1}
+                />
               )}
-              onClick={() => {
-                setTypeOfMeasurement('relative');
-              }}
-            >
-              <p>Unidades relativas</p>
-            </button>
+            </div>
           </div>
-          <div className="">
-            <button
-              className={clsx(
-                'text-center rounded-xl p-2 border',
-                typeOfMeasurement === 'absolute'
-                  ? 'border-brandGreen'
-                  : 'border-transparent',
-              )}
-              onClick={() => {
-                setTypeOfMeasurement('absolute');
-              }}
-            >
-              <p>Unidades absolutas</p>
-            </button>
-          </div>
+          {/* eslint-disable-next-line */}
+          <img
+            src={product.image}
+            alt={product.title}
+            className="md:hidden w-[49%] object-contain rounded-xl bg-white border border-stone-200 self-center"
+          />
         </div>
-        <div className="border border-stone-200 rounded-xl">
-          {typeOfMeasurement === 'relative' ? (
-            <Select
-              id={`percentage-${product.id}`}
-              name="percentage"
-              options={[
-                { id: '12.5', value: '1/8 unidad' },
-                { id: '16.66', value: '1/6 unidad' },
-                { id: '20', value: '1/5 unidad' },
-                { id: '25', value: '1/4 unidad' },
-                { id: '33.33', value: '1/3 unidad' },
-                { id: '50', value: '1/2 unidad' },
-                { id: '100', value: '1 unidad', default: true },
-                { id: '200', value: '2 unidades' },
-                { id: '300', value: '3 unidades' },
-                { id: '400', value: '4 unidades' },
-                { id: '500', value: '5 unidades' },
-              ]}
-              className="w-full"
-              selectClassName="w-full text-center rounded-xl p-1 md:px-4 md:py-2 bg-stone-200"
-              onChange={(e) => {
-                changePercentage(Number(e.target.value));
-              }}
-            />
-          ) : (
-            <Input
-              className="flex flex-col gap-1 md:gap-2"
-              inputClassName="md:px-4 md:py-2"
-              id={`proteins-${product.id}`}
-              name="proteins"
-              type="number"
-              onChange={(e) => {
-                changeAbsoluteWeight(Number(e.target.value));
-              }}
-              placeholder="Peso en gramos..."
-              required
-              step={0.1}
-            />
-          )}
-        </div>
+
         <div className="border-b border-stone-300 mb-1 py-2 flex items-center gap-4">
           <p className="text-lg text-brandGreen">Porción</p>
           <p>{`${weight}g / ${product.presentationSize}g`}</p>

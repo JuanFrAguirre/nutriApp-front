@@ -56,6 +56,11 @@ export const Product = ({ product }: Props) => {
         'w-full p-3 py-2 border-2 rounded-lg shadow-xl space-y-2 relative flex flex-col justify-between',
         isAddedToCalculator ? 'border-brandGreen' : 'border-stone-200',
       )}
+      onClick={
+        isAddedToCalculator
+          ? onRemoveProductFromCalculator
+          : onAddProductToCalculator
+      }
     >
       <button
         className="absolute right-2 top-2 bg-brandGreen rounded-full p-0.5"
@@ -78,93 +83,77 @@ export const Product = ({ product }: Props) => {
         <Trashcan className="fill-red-500 w-5 h-5" />
       </button> */}
       <div className="space-y-2">
-        {product.image ? (
-          // eslint-disable-next-line
-          <img
-            src={product.image}
-            alt={product.title}
-            width={900}
-            height={900}
-            className={clsx(
-              'rounded-xl border',
-              isAddedToCalculator ? 'border-brandGreen' : 'border-stone-200',
-            )}
-          />
-        ) : (
-          // eslint-disable-next-line
-          <img
-            src={
-              'https://static.vecteezy.com/system/resources/previews/027/381/351/non_2x/shopping-cart-icon-shopping-trolley-icon-shopping-cart-logo-container-for-goods-and-products-economics-symbol-design-elements-basket-symbol-silhouette-retail-design-elements-vector.jpg'
-            }
-            alt={product.title}
-            width={900}
-            height={900}
-            className={clsx(
-              'rounded-xl border',
-              isAddedToCalculator ? 'border-brandGreen' : 'border-stone-200',
-            )}
-          />
-        )}
+        {/* eslint-disable-next-line */}
+        <img
+          src={
+            product.image ||
+            'https://static.vecteezy.com/system/resources/previews/027/381/351/non_2x/shopping-cart-icon-shopping-trolley-icon-shopping-cart-logo-container-for-goods-and-products-economics-symbol-design-elements-basket-symbol-silhouette-retail-design-elements-vector.jpg'
+          }
+          alt={product.title}
+          width={900}
+          height={900}
+          className={clsx('rounded-xl border', 'border-stone-200')}
+        />
         <h1
           className={clsx(
-            'font-bold text-brandGreen line-clamp-2 pb-1 mt-1 border-b',
-            isAddedToCalculator ? 'border-brandGreen' : 'border-stone-200',
+            'font-bold text-brandGreen line-clamp-2 pb-1 mt-1 border-b border-stone-200',
           )}
         >
           {product.title}
         </h1>
       </div>
 
-      <div
-        className={clsx(
-          'flex justify-between items-center border-b mb-1 pb-1',
-          isAddedToCalculator ? 'border-brandGreen' : 'border-stone-200',
-        )}
-      >
-        <p>Porción</p>
-        <p className="text-brandGreen font-bold">{product.presentationSize}g</p>
+      <div className="hidden">
+        <div className={clsx('flex justify-between items-center')}>
+          <p>Porción</p>
+          <p className="text-brandGreen font-bold">
+            {product.presentationSize}g
+          </p>
+        </div>
       </div>
 
-      <div>
-        <div className="flex gap-1">
-          <div className="flex flex-col basis-1/2">
-            <p>
-              Proteínas <br />{' '}
-              <span className="text-brandGreen font-bold text-lg">
-                {(product.proteins * 0.01 * product.presentationSize).toFixed(
-                  1,
-                )}
-                g
-              </span>
-            </p>
-            <p>
-              Grasas <br />{' '}
-              <span className="text-brandGreen font-bold text-lg">
-                {(product.fats * 0.01 * product.presentationSize).toFixed(1)}g
-              </span>
-            </p>
-          </div>
-          <div className="flex flex-col basis-1/2">
-            <p>
-              Carbos <br />{' '}
-              <span className="text-brandGreen font-bold text-lg">
-                {(
-                  product.carbohydrates *
-                  0.01 *
-                  product.presentationSize
-                ).toFixed(1)}
-                g
-              </span>
-            </p>
-            <p>
-              Calorías <br />{' '}
-              <span className="text-brandGreen font-bold text-lg">
-                {(product.calories * 0.01 * product.presentationSize).toFixed(
-                  1,
-                )}
-                kcal
-              </span>
-            </p>
+      <div className="hidden">
+        <div className="border-t mt-1 pt-1 border-stone-200">
+          <div className="flex gap-1 max-sm:flex-col">
+            <div className="flex flex-col basis-1/2">
+              <p>
+                Proteínas <br />{' '}
+                <span className="text-brandGreen font-bold text-lg">
+                  {(product.proteins * 0.01 * product.presentationSize).toFixed(
+                    1,
+                  )}
+                  g
+                </span>
+              </p>
+              <p>
+                Grasas <br />{' '}
+                <span className="text-brandGreen font-bold text-lg">
+                  {(product.fats * 0.01 * product.presentationSize).toFixed(1)}g
+                </span>
+              </p>
+            </div>
+            <div className="flex flex-col basis-1/2">
+              <p>
+                Carbos <br />{' '}
+                <span className="text-brandGreen font-bold text-lg">
+                  {(
+                    product.carbohydrates *
+                    0.01 *
+                    product.presentationSize
+                  ).toFixed(1)}
+                  g
+                </span>
+              </p>
+              <p>
+                Calorías <br />{' '}
+                <span className="text-brandGreen font-bold text-lg">
+                  {(product.calories * 0.01 * product.presentationSize).toFixed(
+                    1,
+                  )}
+                  kcal
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
