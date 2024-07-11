@@ -23,32 +23,34 @@ export const frankfurter = localFont({
 export const Header = () => {
   return (
     <header
-      className={`bg-white py-4 px-3 border-b-2 border-stone-200 flex justify-between items-center fixed top-0 left-0 right-0 z-[600]`}
+      className={`bg-white py-4 px-3 border-b-2 border-stone-200 fixed top-0 left-0 right-0 z-[600]`}
     >
-      <Link href={'/'} className="flex items-center gap-1">
-        <Image
-          src={Logo}
-          alt="NutriApp logo"
-          width={200}
-          height={200}
-          className="w-8 h-8"
-        />
-        <h1
-          className={`font-bold ${frankfurter.className} tracking-wide text-2xl text-brandGreen font-frankfurter`}
-        >
-          NUTRI APP
-        </h1>
-      </Link>
-      <div>
-        <Input
-          id="searchbar"
-          name="searchbar"
-          type="text"
-          className="w-full"
-          logo
-          inputClassName="w-40"
-          onChange={() => {}}
-        />
+      <div className="flex justify-between items-center max-w-[1400px] mx-auto">
+        <Link href={'/'} className="flex items-center gap-1">
+          <Image
+            src={Logo}
+            alt="NutriApp logo"
+            width={200}
+            height={200}
+            className="w-8 h-8"
+          />
+          <h1
+            className={`font-bold ${frankfurter.className} tracking-wide text-2xl text-brandGreen font-frankfurter`}
+          >
+            NUTRI APP
+          </h1>
+        </Link>
+        <div>
+          <Input
+            id="searchbar"
+            name="searchbar"
+            type="text"
+            className="w-full"
+            logo
+            inputClassName="w-40"
+            onChange={() => {}}
+          />
+        </div>
       </div>
     </header>
   );

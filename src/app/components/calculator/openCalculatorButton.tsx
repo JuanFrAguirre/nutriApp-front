@@ -10,7 +10,7 @@ export const OpenCalculatorButton = () => {
   return (
     <button
       type="button"
-      className="fixed bg-brandGreen rounded-xl h-14 w-14 bottom-10 right-6 z-[400] grid place-items-center shadow-xl border border-stone-200"
+      className="fixed bg-brandGreen rounded-xl h-14 w-14 bottom-12 right-6 z-[400] grid place-items-center shadow-xl border border-stone-200"
       onClick={() => {
         setShow(true);
       }}

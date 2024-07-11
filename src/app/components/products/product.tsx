@@ -131,13 +131,16 @@ export const Product = ({ product }: Props) => {
             <p>
               Proteínas <br />{' '}
               <span className="text-brandGreen font-bold text-lg">
-                {product.proteins}g
+                {(product.proteins * 0.01 * product.presentationSize).toFixed(
+                  1,
+                )}
+                g
               </span>
             </p>
             <p>
               Grasas <br />{' '}
               <span className="text-brandGreen font-bold text-lg">
-                {product.fats}g
+                {(product.fats * 0.01 * product.presentationSize).toFixed(1)}g
               </span>
             </p>
           </div>
@@ -145,13 +148,21 @@ export const Product = ({ product }: Props) => {
             <p>
               Carbos <br />{' '}
               <span className="text-brandGreen font-bold text-lg">
-                {product.carbohydrates}g
+                {(
+                  product.carbohydrates *
+                  0.01 *
+                  product.presentationSize
+                ).toFixed(1)}
+                g
               </span>
             </p>
             <p>
               Calorías <br />{' '}
               <span className="text-brandGreen font-bold text-lg">
-                {product.calories}kcal
+                {(product.calories * 0.01 * product.presentationSize).toFixed(
+                  1,
+                )}
+                kcal
               </span>
             </p>
           </div>

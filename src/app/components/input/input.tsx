@@ -58,9 +58,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   );
 });
 
+const propsToFilter = ['labelClassName', 'inputClassName', 'logo'];
+
 const RawInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return (
     <input
+      {...Object.fromEntries(
+        Object.entries(props).filter(([key]) => !propsToFilter.includes(key)),
+      )}
       type={props.type}
       name={props.name}
       id={props.id}

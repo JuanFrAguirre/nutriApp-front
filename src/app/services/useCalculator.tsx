@@ -11,8 +11,12 @@ import {
 } from 'react';
 import { Product } from '../components/products/product';
 
+export type TypeOfMeasurement = 'relative' | 'absolute';
+
 export interface ExtendedProduct extends Product {
+  typeOfMeasurement?: TypeOfMeasurement;
   percentage?: number;
+  absoluteWeight?: number;
 }
 
 interface CalculatorContext {
@@ -49,10 +53,12 @@ export const useCalculator = () => {
   );
 
   const modifyProduct = useCallback(
-    (product: ExtendedProduct) => {
+    (product: ExtendedProduct, type: 'relative' | 'absolute') => {
       setProductsList((currentProducts) => [
         ...currentProducts.map((currProduct) =>
-          currProduct.id === product.id ? product : currProduct,
+          currProduct.id === product.id
+            ? { ...product, typeOfMeasurement: type }
+            : currProduct,
         ),
       ]);
     },
@@ -68,11 +74,16 @@ export const useCalculator = () => {
     [setProductsList],
   );
 
+  const clearCalculator = useCallback(() => {
+    setProductsList([]);
+  }, [setProductsList]);
+
   return {
     productsList,
     setProductsList,
     addProduct,
     modifyProduct,
     removeProduct,
+    clearCalculator,
   };
 };

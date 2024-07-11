@@ -1,8 +1,16 @@
+'use client';
 import { useLoadingSpinner } from '@nutriApp/app/services/useLoading';
 import { useModal } from '@nutriApp/app/services/useModal';
 import { useProducts } from '@nutriApp/app/services/useProducts';
 import { checkIfNumber } from '@nutriApp/app/utils/checkIfNumber';
-import { FormEvent, useCallback, useEffect, useRef } from 'react';
+import {
+  ChangeEvent,
+  FormEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { toast } from 'react-toastify';
 import { Input } from '../input/input';
 import { AddProductModal } from '../modals/addProductModal';
@@ -13,6 +21,7 @@ export const AddProduct = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const { addProduct } = useProducts();
   const { setLoading } = useLoadingSpinner();
+  const [image, setImage] = useState('');
 
   const validateForm = useCallback((formData: FormData) => {
     const formValues = Object.fromEntries(formData.entries());
@@ -63,6 +72,11 @@ export const AddProduct = () => {
     [addProduct, setShow, setLoading, validateForm],
   );
 
+  const onImgInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setImage(e.target.value);
+  };
+
   useEffect(() => {
     if (titleRef.current) titleRef.current.focus();
 
@@ -88,92 +102,105 @@ export const AddProduct = () => {
           <h2 className="py-4 text-2xl md:text-4xl font-semibold text-center">
             Add a product
           </h2>
-          <div className="md:w-[80%] lg:w-[60%] xl:max-w-[1000px] md:mx-auto space-y-4">
-            <Input
-              className="flex flex-col gap-1 md:gap-2"
-              labelClassName="md:font-semibold"
-              inputClassName="md:px-4 md:py-2"
-              id="title"
-              name="title"
-              type="text"
-              label="Title"
-              required
-              ref={titleRef}
-            />
-            <Input
-              className="flex flex-col gap-1 md:gap-2"
-              labelClassName="md:font-semibold"
-              inputClassName="md:px-4 md:py-2"
-              id="image"
-              name="image"
-              type="text"
-              label="Image URL"
-            />
-            <Input
-              className="flex flex-col gap-1 md:gap-2"
-              labelClassName="md:font-semibold"
-              inputClassName="md:px-4 md:py-2"
-              id="tags"
-              name="tags"
-              type="text"
-              label="Etiquetas (separadas por coma)"
-            />
-            <div className="grid grid-cols-2 gap-4">
-              <Input
-                className="flex flex-col gap-1 md:gap-2"
-                labelClassName="md:font-semibold"
-                inputClassName="md:px-4 md:py-2"
-                id="presentationSize"
-                name="presentationSize"
-                type="number"
-                label="Presentation Size"
-                required
-                step={0.1}
-              />
-              <Input
-                className="flex flex-col gap-1 md:gap-2"
-                labelClassName="md:font-semibold"
-                inputClassName="md:px-4 md:py-2"
-                id="calories"
-                name="calories"
-                type="number"
-                label="Calories"
-                required
-                step={0.1}
-              />
-              <Input
-                className="flex flex-col gap-1 md:gap-2"
-                labelClassName="md:font-semibold"
-                inputClassName="md:px-4 md:py-2"
-                id="proteins"
-                name="proteins"
-                type="number"
-                label="Proteins"
-                required
-                step={0.1}
-              />
-              <Input
-                className="flex flex-col gap-1 md:gap-2"
-                labelClassName="md:font-semibold"
-                inputClassName="md:px-4 md:py-2"
-                id="fats"
-                name="fats"
-                type="number"
-                label="Fats"
-                required
-                step={0.1}
-              />
-              <Input
-                className="flex flex-col gap-1 md:gap-2"
-                labelClassName="md:font-semibold"
-                inputClassName="md:px-4 md:py-2"
-                id="carbohydrates"
-                name="carbohydrates"
-                type="number"
-                label="Carbohydrates"
-                required
-                step={0.1}
-              />
+          <div className="md:w-[80%] lg:w-[60%] xl:max-w-[1000px] md:mx-auto">
+            <div className="flex gap-10">
+              <div className="space-y-4 grow">
+                <Input
+                  className="flex flex-col gap-1 md:gap-2"
+                  labelClassName="md:font-semibold"
+                  inputClassName="md:px-4 md:py-2"
+                  id="title"
+                  name="title"
+                  type="text"
+                  label="Título"
+                  required
+                  ref={titleRef}
+                />
+                <Input
+                  className="flex flex-col gap-1 md:gap-2"
+                  labelClassName="md:font-semibold"
+                  inputClassName="md:px-4 md:py-2"
+                  id="image"
+                  name="image"
+                  type="text"
+                  label="Imagen (URL)"
+                  onChange={onImgInputChange}
+                />
+                <Input
+                  className="flex flex-col gap-1 md:gap-2"
+                  labelClassName="md:font-semibold"
+                  inputClassName="md:px-4 md:py-2"
+                  id="tags"
+                  name="tags"
+                  type="text"
+                  label="Etiquetas (separadas por coma)"
+                />
+                <div className="grid grid-cols-2 gap-4">
+                  <Input
+                    className="flex flex-col gap-1 md:gap-2"
+                    labelClassName="md:font-semibold"
+                    inputClassName="md:px-4 md:py-2"
+                    id="presentationSize"
+                    name="presentationSize"
+                    type="number"
+                    label="Presentación (en gramos)"
+                    required
+                    step={0.1}
+                  />
+                  <Input
+                    className="flex flex-col gap-1 md:gap-2"
+                    labelClassName="md:font-semibold"
+                    inputClassName="md:px-4 md:py-2"
+                    id="calories"
+                    name="calories"
+                    type="number"
+                    label="Calorías (en 100g)"
+                    required
+                    step={0.1}
+                  />
+                  <Input
+                    className="flex flex-col gap-1 md:gap-2"
+                    labelClassName="md:font-semibold"
+                    inputClassName="md:px-4 md:py-2"
+                    id="proteins"
+                    name="proteins"
+                    type="number"
+                    label="Proteínas (en 100g)"
+                    required
+                    step={0.1}
+                  />
+                  <Input
+                    className="flex flex-col gap-1 md:gap-2"
+                    labelClassName="md:font-semibold"
+                    inputClassName="md:px-4 md:py-2"
+                    id="fats"
+                    name="fats"
+                    type="number"
+                    label="Grasas (en 100g)"
+                    required
+                    step={0.1}
+                  />
+                  <Input
+                    className="flex flex-col gap-1 md:gap-2"
+                    labelClassName="md:font-semibold"
+                    inputClassName="md:px-4 md:py-2"
+                    id="carbohydrates"
+                    name="carbohydrates"
+                    type="number"
+                    label="Carbohidratos (en 100g)"
+                    required
+                    step={0.1}
+                  />
+                </div>
+              </div>
+              {image ? (
+                /* eslint-disable-next-line */
+                <img
+                  src={image}
+                  alt={titleRef?.current?.value}
+                  className="max-w-[50%] rounded-xl border border-stone-200 object-contain bg-white max-xl:hidden"
+                />
+              ) : null}
             </div>
           </div>
         </div>
