@@ -11,15 +11,12 @@ export interface Product {
   id?: string;
   title: string;
   tags: string;
-  description?: string;
   presentationSize: number;
   image?: string;
   calories: number;
   proteins: number;
   fats: number;
   carbohydrates: number;
-  createdAt?: string;
-  updatedAt?: string;
 }
 
 interface Props {

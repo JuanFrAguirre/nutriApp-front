@@ -121,10 +121,15 @@ export const useProducts = () => {
       const response = await axios.get<Product>(
         `${BACKEND_URL}/products/${id}`,
       );
-      setProduct(response.data);
-      return response;
+      if (response.status === 200) {
+        setProduct(response.data);
+        return response;
+      } else {
+        throw new Error(`Request failed with status code ${response.status}`);
+      }
     } catch (error) {
       console.error(error);
+      throw error;
     }
   }, []);
 

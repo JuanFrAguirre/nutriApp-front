@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { Input } from '@nutriApp/components/input/input';
 import { useProducts } from '@nutriApp/services/useProducts';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import clsx from 'clsx';
+import { usePathname, useRouter } from 'next/navigation';
 
 export const frankfurter = localFont({
   src: [
@@ -25,6 +27,7 @@ export const frankfurter = localFont({
 export const Header = () => {
   const { filterProducts, setFiltering } = useProducts();
   const [filterKeywords, setFilterKeywords] = useState('');
+  const pathname = usePathname();
 
   const onFilterChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setFilterKeywords(e.target.value);
@@ -58,7 +61,7 @@ export const Header = () => {
             NUTRI APP
           </h1>
         </Link>
-        <div>
+        <div className={clsx(pathname !== '/products' && 'hidden')}>
           <Input
             id="searchbar"
             name="searchbar"
