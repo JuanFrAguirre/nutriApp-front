@@ -1,8 +1,9 @@
 'use client';
-import { useLoadingSpinner } from '@nutriApp/app/services/useLoading';
-import { useModal } from '@nutriApp/app/services/useModal';
-import { useProducts } from '@nutriApp/app/services/useProducts';
-import { checkIfNumber } from '@nutriApp/app/utils/checkIfNumber';
+import { useLoadingSpinner } from '@nutriApp/services/useLoading';
+import { useProducts } from '@nutriApp/services/useProducts';
+import { checkIfNumber } from '@nutriApp/utils/checkIfNumber';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   ChangeEvent,
   FormEvent,
@@ -13,13 +14,12 @@ import {
 } from 'react';
 import { toast } from 'react-toastify';
 import { Input } from '../input/input';
-import { AddProductModal } from '../modals/addProductModal';
 
-const STOCK_IMAGE =
+export const STOCK_IMAGE =
   'https://static.vecteezy.com/system/resources/previews/027/381/351/non_2x/shopping-cart-icon-shopping-trolley-icon-shopping-cart-logo-container-for-goods-and-products-economics-symbol-design-elements-basket-symbol-silhouette-retail-design-elements-vector.jpg';
 
 export const AddProduct = () => {
-  const { setShow } = useModal(AddProductModal.displayName!);
+  const { push } = useRouter();
   const addProductForm = useRef<HTMLFormElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const { addProduct } = useProducts();
@@ -69,10 +69,10 @@ export const AddProduct = () => {
         setLoading(true);
         await addProduct(extendedProduct);
         setLoading(false);
-        setShow(false);
+        push('/products');
       }
     },
-    [addProduct, setShow, setLoading, validateForm],
+    [addProduct, setLoading, validateForm, push],
   );
 
   const onImgInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -81,18 +81,8 @@ export const AddProduct = () => {
   };
 
   useEffect(() => {
-    if (titleRef.current) titleRef.current.focus();
-
-    const handleKeyUp = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setShow(false);
-    };
-
-    document.addEventListener('keyup', handleKeyUp);
-
-    return () => {
-      document.removeEventListener('keyup', handleKeyUp);
-    };
-  }, [setShow]);
+    titleRef?.current?.focus();
+  }, []);
 
   return (
     <>
@@ -102,10 +92,13 @@ export const AddProduct = () => {
         className="px-4 py-4 flex flex-col justify-between h-full"
       >
         <div className="flex flex-col gap-1">
-          <h2 className="py-4 text-2xl md:text-4xl font-semibold text-center">
-            Add a product
+          <h2 className="py-4 pt-10 text-2xl md:text-4xl font-semibold text-center">
+            Agregar un producto
           </h2>
-          <div className="md:w-[80%] lg:w-[60%] xl:max-w-[1000px] md:mx-auto">
+          <div className="md:w-[80%] lg:w-[60%] xl:max-w-[1000px] md:mx-auto relative">
+            <Link className="absolute -top-24 left-0" href={'/'}>
+              <p className="hover:text-brandGreen  underline">{`Volver a productos`}</p>
+            </Link>
             <div className="flex gap-10">
               <div className="space-y-4 grow">
                 <Input
@@ -127,17 +120,8 @@ export const AddProduct = () => {
                   name="image"
                   type="text"
                   label="Imagen (URL)"
-                  onChange={onImgInputChange}
+                  onBlur={onImgInputChange}
                 />
-                {/* <Input
-                  className="flex flex-col gap-1 md:gap-2"
-                  labelClassName="md:font-semibold"
-                  inputClassName="md:px-4 md:py-2"
-                  id="mercadonApinumber"
-                  name="mercadonApinumber"
-                  type="text"
-                  label="Numero de producto (en API de Mercadona)"
-                /> */}
                 <Input
                   className="flex flex-col gap-1 md:gap-2"
                   labelClassName="md:font-semibold"
@@ -208,7 +192,7 @@ export const AddProduct = () => {
               {image ? (
                 /* eslint-disable-next-line */
                 <img
-                  src={image}
+                  src={image || STOCK_IMAGE}
                   alt={titleRef?.current?.value}
                   className="max-w-[50%] rounded-xl border border-stone-200 object-contain bg-white max-xl:hidden"
                 />
@@ -218,7 +202,7 @@ export const AddProduct = () => {
         </div>
         <div className="flex justify-end md:justify-center mt-4">
           <button className="bg-brandGreen text-white py-2 px-4 rounded-xl">
-            Submit
+            Agregar
           </button>
         </div>
       </form>

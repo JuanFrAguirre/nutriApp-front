@@ -1,6 +1,6 @@
 'use client';
-import { useCalculator } from '@nutriApp/app/services/useCalculator';
-import { useModal } from '@nutriApp/app/services/useModal';
+import { useCalculator } from '@nutriApp/services/useCalculator';
+import { useModal } from '@nutriApp/services/useModal';
 import { Calculator } from '../calculator/calculator';
 import { Modal } from './modal';
 import { useEffect } from 'react';

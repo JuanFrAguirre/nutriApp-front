@@ -1,6 +1,6 @@
-import { Food } from '@nutriApp/app/icons/Food';
-import { useCalculator } from '@nutriApp/app/services/useCalculator';
-import { useModal } from '@nutriApp/app/services/useModal';
+import { Food } from '@nutriApp/icons/Food';
+import { useCalculator } from '@nutriApp/services/useCalculator';
+import { useModal } from '@nutriApp/services/useModal';
 import { CalculatorModal } from '../modals/calculatorModal';
 
 export const OpenCalculatorButton = () => {

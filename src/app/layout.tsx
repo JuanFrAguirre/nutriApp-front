@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
-import { LoadingSpinner } from './components/loadingSpinner/loadingSpinner';
+import { LoadingSpinner } from '../components/loadingSpinner/loadingSpinner';
 import './globals.css';
-import { CalculatorProvider } from './services/useCalculator';
-import { LoadingSpinnerProvider } from './services/useLoading';
-import { ModalProvider } from './services/useModal';
+import { CalculatorProvider } from '../services/useCalculator';
+import { LoadingSpinnerProvider } from '../services/useLoading';
+import { ModalProvider } from '../services/useModal';
 import { ToastContainer } from 'react-toastify';
-import ToastProvider from './components/toastContainer/toastContainer';
-import { ProductsProvider } from './services/useProducts';
+import ToastProvider from '../components/toastContainer/toastContainer';
+import { ProductsProvider } from '../services/useProducts';
+import { Header } from '@nutriApp/components/header/header';
 
 const openSans = Open_Sans({ subsets: ['latin'] });
 
@@ -28,7 +29,10 @@ export default function RootLayout({
           <ModalProvider>
             <LoadingSpinnerProvider>
               <ProductsProvider>
-                <CalculatorProvider>{children}</CalculatorProvider>
+                <CalculatorProvider>
+                  <Header />
+                  {children}
+                </CalculatorProvider>
               </ProductsProvider>
               <LoadingSpinner />
             </LoadingSpinnerProvider>

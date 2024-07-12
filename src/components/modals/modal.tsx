@@ -1,5 +1,5 @@
 'use client';
-import { PlusSign } from '@nutriApp/app/icons/PlusSign';
+import { PlusSign } from '@nutriApp/icons/PlusSign';
 import clsx from 'clsx';
 import { FC, ReactNode } from 'react';
 

@@ -1,10 +1,10 @@
 'use client';
-import { ExtendedProduct } from '@nutriApp/app/services/useCalculator';
+import { ExtendedProduct } from '@nutriApp/services/useCalculator';
 import { FC, useCallback } from 'react';
 import { CalculatorProduct } from './calculatorProduct';
-import { Trashcan } from '@nutriApp/app/icons/Trashcan';
+import { Trashcan } from '@nutriApp/icons/Trashcan';
 import { useCalculator } from '../../services/useCalculator';
-import { useModal } from '@nutriApp/app/services/useModal';
+import { useModal } from '@nutriApp/services/useModal';
 import { CalculatorModal } from '../modals/calculatorModal';
 
 interface CalculatorProps {

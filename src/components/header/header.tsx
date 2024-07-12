@@ -3,17 +3,19 @@ import localFont from 'next/font/local';
 import Image from 'next/image';
 import Logo from '@nutriApp/img/nutriApp.jpeg';
 import Link from 'next/link';
-import { Input } from '@nutriApp/app/components/input/input';
+import { Input } from '@nutriApp/components/input/input';
+import { useProducts } from '@nutriApp/services/useProducts';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
 export const frankfurter = localFont({
   src: [
     {
-      path: '../../../fonts/FranxurterMedium.ttf',
+      path: '../../fonts/FranxurterMedium.ttf',
       style: 'normal',
       weight: '400',
     },
     {
-      path: '../../../fonts/FranxurterFat.ttf',
+      path: '../../fonts/FranxurterFat.ttf',
       style: 'bold',
       weight: '700',
     },
@@ -21,6 +23,22 @@ export const frankfurter = localFont({
 });
 
 export const Header = () => {
+  const { filterProducts, setFiltering } = useProducts();
+  const [filterKeywords, setFilterKeywords] = useState('');
+
+  const onFilterChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setFilterKeywords(e.target.value);
+  }, []);
+
+  useEffect(() => {
+    if (!!filterKeywords.length) {
+      filterProducts(filterKeywords);
+    }
+    if (!filterKeywords.length) {
+      setFiltering(false);
+    }
+  }, [filterKeywords, setFiltering, filterProducts]);
+
   return (
     <header
       className={`bg-white py-4 px-3 border-b-2 border-stone-200 fixed top-0 left-0 right-0 z-[600]`}
@@ -48,7 +66,7 @@ export const Header = () => {
             className="w-full"
             logo
             inputClassName="w-40"
-            onChange={() => {}}
+            onChange={onFilterChange}
           />
         </div>
       </div>

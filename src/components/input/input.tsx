@@ -1,4 +1,4 @@
-import { Search } from '@nutriApp/app/icons/search';
+import { Search } from '@nutriApp/icons/search';
 import clsx from 'clsx';
 import {
   ChangeEventHandler,

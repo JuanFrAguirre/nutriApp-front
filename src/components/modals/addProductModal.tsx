@@ -1,4 +1,4 @@
-import { useModal } from '@nutriApp/app/services/useModal';
+import { useModal } from '@nutriApp/services/useModal';
 import { Modal } from './modal';
 import { AddProduct } from '../products/addProduct';
 

@@ -1,5 +1,5 @@
 'use client';
-import { useLoadingSpinner } from '@nutriApp/app/services/useLoading';
+import { useLoadingSpinner } from '@nutriApp/services/useLoading';
 
 export const LoadingSpinner = () => {
   const { loading } = useLoadingSpinner();

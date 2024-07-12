@@ -1,10 +1,10 @@
 'use client';
-import { Trashcan } from '@nutriApp/app/icons/Trashcan';
+import { Trashcan } from '@nutriApp/icons/Trashcan';
 import {
   ExtendedProduct,
   TypeOfMeasurement,
   useCalculator,
-} from '@nutriApp/app/services/useCalculator';
+} from '@nutriApp/services/useCalculator';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Select } from '../select/select';
 import { Input } from '../input/input';
