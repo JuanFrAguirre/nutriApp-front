@@ -95,7 +95,7 @@ export const AddProduct = () => {
           <h2 className="py-4 pt-10 text-2xl md:text-4xl font-semibold text-center">
             Agregar un producto
           </h2>
-          <div className="md:w-[80%] lg:w-[60%] xl:max-w-[1000px] md:mx-auto relative">
+          <div className="xl:max-w-[1400px] md:mx-auto relative">
             <Link className="absolute -top-24 left-0" href={'/'}>
               <p className="hover:text-brandGreen  underline">{`Volver a productos`}</p>
             </Link>
